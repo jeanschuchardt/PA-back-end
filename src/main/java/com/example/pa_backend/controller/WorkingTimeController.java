@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CommonsLog
 @RestController
-@RequestMapping("/workingHours")
+@RequestMapping("/workingTime")
 public class WorkingTimeController {
 
     @GetMapping("")
