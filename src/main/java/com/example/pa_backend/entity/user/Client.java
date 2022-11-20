@@ -1,4 +1,4 @@
-package com.example.pa_backend.entity;
+package com.example.pa_backend.entity.user;
 
 import lombok.Data;
 

@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "workinghours")
+@Table(name = "working_hours")
 public class WorkingHours extends BaseEntity {
     
     @Column

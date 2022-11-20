@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 @CommonsLog
 @RestController
-@RequestMapping("/therapistConfiguration")
-public class TherapistConfigurationController {
+@RequestMapping("/therapyConfiguration")
+public class TherapyConfigurationController {
 
     @GetMapping("")
     public Object getAll() {

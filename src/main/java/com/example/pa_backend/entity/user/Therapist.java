@@ -1,8 +1,7 @@
-package com.example.pa_backend.entity;
+package com.example.pa_backend.entity.user;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 

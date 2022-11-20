@@ -10,8 +10,8 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "therapist_configuration")
-public class TherapistConfiguration extends BaseEntity {
+@Table(name = "therapy_configuration")
+public class TherapyConfiguration extends BaseEntity {
 
     @Column
     private Date date;
