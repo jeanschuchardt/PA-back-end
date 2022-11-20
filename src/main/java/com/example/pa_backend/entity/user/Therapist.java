@@ -7,8 +7,7 @@ import javax.persistence.Table;
 
 
 @Data
-@Entity
-@Table(name = "therapist")
+@Entity(name = "therapist")
 public class Therapist extends BaseUser implements User {
 
 
