@@ -8,9 +8,8 @@ import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Entity
+@Entity(name = "therapist_address")
 @Data
-@Table(name = "therapist_address")
 public class TherapistAddress extends BaseEntity {
 
     @Column

@@ -7,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
-@Entity
+@Entity(name = "working_hours")
 @Data
-@Table(name = "working_hours")
 public class WorkingHours extends BaseEntity {
     
     @Column
