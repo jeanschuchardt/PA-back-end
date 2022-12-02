@@ -1,40 +1,52 @@
 package com.example.pa_backend.controller;
 
+import com.example.pa_backend.dto.AgendaDTO;
+import com.example.pa_backend.entity.Agenda;
+import com.example.pa_backend.service.AgendaService;
 import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CommonsLog
 @RestController
 @RequestMapping("/agenda")
 public class AgendaController {
 
+    @Autowired
+    private AgendaService agendaService;
+
     @GetMapping("")
     public Object getAll() {
-
-        return "";
+        List<Agenda> all = agendaService.getAll();
+        return all;
     }
 
     @GetMapping("/{id}")
     public Object getById(@PathVariable int id) {
-
-        return null;
+        Agenda byId = agendaService.getById(id);
+        return byId;
     }
 
     @PostMapping("/")
-    public Object create() {
+    public Object create(@RequestBody AgendaDTO agendaDTO) {
 
-        return null;
+
+        return agendaService.create(agendaDTO);
     }
 
     @PutMapping("/{id}")
-    public Object update(@PathVariable int id) {
+    public Object update(@PathVariable int id,
+                         @RequestBody AgendaDTO agendaDTO) {
 
-        return null;
+
+        return agendaService.update(id,agendaDTO);
     }
 
     @DeleteMapping("/{id}")
     public Object delete(@PathVariable int id) {
 
-        return null;
+        return agendaService.delete(id);
     }
 }
