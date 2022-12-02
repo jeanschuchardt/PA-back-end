@@ -1,5 +1,6 @@
 package com.example.pa_backend.entity;
 
+import com.example.pa_backend.enumerations.Weekdays;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 public class WorkingHours extends BaseEntity {
     
     @Column
-    private String weekDay;
+    private Weekdays weekDay;
 
     @Column
     private Timestamp startTime;
@@ -25,5 +26,6 @@ public class WorkingHours extends BaseEntity {
 
     @Column
     private int  therapistAddressId;
+
 
 }
