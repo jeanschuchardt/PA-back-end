@@ -1,6 +1,9 @@
 package com.example.pa_backend.controller;
 
+import com.example.pa_backend.dto.TherapistAddressDTO;
+import com.example.pa_backend.service.TherapistAddressService;
 import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CommonsLog
@@ -8,33 +11,36 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/therapistAddress")
 public class TherapistAddressController {
 
+    @Autowired
+    private TherapistAddressService therapistAddressService;
+
     @GetMapping("")
     public Object getAll() {
 
-        return "";
+        return therapistAddressService.getAll() ;
     }
 
     @GetMapping("/{id}")
     public Object getById(@PathVariable int id) {
 
-        return null;
+        return therapistAddressService.getById(id);
     }
 
     @PostMapping("/")
-    public Object create() {
+    public Object create(TherapistAddressDTO  therapistAddressDTO) {
 
-        return null;
+        return therapistAddressService.create(therapistAddressDTO);
     }
 
     @PutMapping("/{id}")
-    public Object update(@PathVariable int id) {
+    public Object update(@PathVariable int id, @RequestBody TherapistAddressDTO therapistAddressDTO) {
 
-        return null;
+        return therapistAddressService.update(id,therapistAddressDTO);
     }
 
     @DeleteMapping("/{id}")
     public Object delete(@PathVariable int id) {
 
-        return null;
+        return therapistAddressService.delete(id);
     }
 }
