@@ -17,7 +17,7 @@ public class AgendaController {
     @Autowired
     private AgendaService agendaService;
 
-    @GetMapping("")
+    @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json")
     public Object getAll() {
         List<Agenda> all = agendaService.getAll();
         return all;
