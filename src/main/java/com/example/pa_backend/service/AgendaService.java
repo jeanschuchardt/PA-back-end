@@ -83,8 +83,6 @@ public class AgendaService {
         } catch (Exception e) {
             throw new RuntimeException("Error on delete");
         }
-
-
     }
 
 
