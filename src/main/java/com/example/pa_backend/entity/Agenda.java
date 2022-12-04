@@ -29,4 +29,7 @@ public class Agenda extends BaseEntity {
 
     @Column
     private int  clientId;
+
+    @Column
+    private int  therapyId;
 }

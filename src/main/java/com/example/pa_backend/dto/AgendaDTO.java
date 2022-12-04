@@ -17,4 +17,5 @@ public class AgendaDTO  {
     private int  therapistId;
     private int  clientId;
     private int locationId;
+    private int  therapyId;
 }
