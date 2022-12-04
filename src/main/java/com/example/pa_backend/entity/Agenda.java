@@ -6,20 +6,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity(name = "agenda")
 @Data
+@Table(name = "agenda")
 public class Agenda extends BaseEntity {
 
     @Column
-    private Date date;
+    private LocalDate date;
 
     @Column
-    private Timestamp startTime;
+    private LocalTime startTime;
 
     @Column
-    private Timestamp endTime;
+    private LocalTime endTime;
 
     @Column
     private int  therapistId;
