@@ -3,6 +3,7 @@ package com.example.pa_backend.dto;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
