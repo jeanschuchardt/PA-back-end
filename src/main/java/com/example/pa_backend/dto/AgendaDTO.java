@@ -14,4 +14,5 @@ public class AgendaDTO  {
     private Timestamp endTime;
     private int  therapistId;
     private int  clientId;
+    private int locationId;
 }

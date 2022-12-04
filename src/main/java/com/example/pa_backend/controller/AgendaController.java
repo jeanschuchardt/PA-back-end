@@ -17,8 +17,8 @@ public class AgendaController {
     @Autowired
     private AgendaService agendaService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json")
-    public Object getAll() {
+    @GetMapping("")
+    public List<Agenda> getAll() {
         List<Agenda> all = agendaService.getAll();
         return all;
     }
@@ -36,13 +36,13 @@ public class AgendaController {
         return agendaService.create(agendaDTO);
     }
 
-    @PutMapping("/{id}")
-    public Object update(@PathVariable int id,
-                         @RequestBody AgendaDTO agendaDTO) {
-
-
-        return agendaService.update(id,agendaDTO);
-    }
+//    @PutMapping("/{id}")
+//    public Object update(@PathVariable int id,
+//                         @RequestBody AgendaDTO agendaDTO) {
+//
+//
+//        return agendaService.update(id,agendaDTO);
+//    }
 
     @DeleteMapping("/{id}")
     public Object delete(@PathVariable int id) {
