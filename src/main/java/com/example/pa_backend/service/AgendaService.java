@@ -36,6 +36,10 @@ public class AgendaService {
 
     public Agenda create(AgendaDTO agendaDTO) {
         ModelMapper modelMapper = new ModelMapper();
+        modelMapper
+                .getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT)
+                .setSkipNullEnabled(true);
         Agenda map = modelMapper.map(agendaDTO, Agenda.class);
 
         return agendaRepository.save(map);
