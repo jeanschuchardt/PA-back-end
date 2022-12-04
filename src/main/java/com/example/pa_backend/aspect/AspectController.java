@@ -1,5 +1,6 @@
 package com.example.pa_backend.aspect;
 
+import com.example.pa_backend.exception.ServiceException;
 import lombok.extern.apachecommons.CommonsLog;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -22,7 +23,13 @@ public class AspectController {
         log.info(action);
         try {
             return pjd.proceed();
-        } catch (Throwable e) {
+        }
+        catch (ServiceException e) {
+            log.error(e.getMessage(), e);
+            throw e;
+
+        }
+        catch (Throwable e) {
             log.error(e.getMessage(), e);
             throw  new RuntimeException();
         }

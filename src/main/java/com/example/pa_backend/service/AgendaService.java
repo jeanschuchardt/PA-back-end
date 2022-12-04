@@ -2,10 +2,12 @@ package com.example.pa_backend.service;
 
 import com.example.pa_backend.dto.AgendaDTO;
 import com.example.pa_backend.entity.Agenda;
+import com.example.pa_backend.exception.ServiceException;
 import com.example.pa_backend.repository.AgendaRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +37,17 @@ public class AgendaService {
 
 
     public Agenda create(AgendaDTO agendaDTO) {
+
+        List<Agenda> agendas =
+                agendaRepository.findAllByTherapistIdAndDateAndStartTimeGreaterThanEqualAndEndTimeLessThanEqual(
+                        agendaDTO.getTherapistId(),
+                        agendaDTO.getDate(),
+                        agendaDTO.getStartTime(),
+                        agendaDTO.getEndTime());
+
+        if(!agendas.isEmpty()){
+            throw  new ServiceException("horario nao disponivel", HttpStatus.BAD_REQUEST);
+        }
         ModelMapper modelMapper = new ModelMapper();
         modelMapper
                 .getConfiguration()
