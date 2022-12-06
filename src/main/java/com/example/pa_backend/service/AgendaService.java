@@ -44,14 +44,19 @@ public class AgendaService {
 
 
     public Agenda create(AgendaDTO agendaDTO) {
-
+        //verifica se a tipo de atedimento possui uma pre-configuração
         TherapyConfiguration therapyConfiguration = getTherapyConfiguration(agendaDTO);
+
+        //com a pre-configuração atualiza o horaio que o atendimento ira terminar
         agendaDTO.setEndTime(getEndTime(agendaDTO.getStartTime(),therapyConfiguration));
 
-        checkAgendaAvailabilit(agendaDTO);
+        // verifica se a data e o horario, assim como o terapeuta e o local esta disponivel
+        checkAgendaAvailability(agendaDTO);
 
+        //mapeia o dto para a entity
         Agenda map = mapAgenda(agendaDTO);
 
+        //salva o agendamento
         return agendaRepository.save(map);
     }
 
@@ -77,10 +82,11 @@ public class AgendaService {
                 .findByTherapyIdAndTherapistIdAndTherapistAddressId(agendaDTO.getTherapyId(),
                                                                     agendaDTO.getTherapistId(),
                                                                     agendaDTO.getLocationId())
-                .orElseThrow(() -> new ServiceException("therapy configuration not available", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new ServiceException("Terapia não apresenta configurações pre definidas.",
+                                                        HttpStatus.BAD_REQUEST));
     }
 
-    private void checkAgendaAvailabilit(AgendaDTO agendaDTO) {
+    private void checkAgendaAvailability(AgendaDTO agendaDTO) {
         List<Agenda> agendas =
                 agendaRepository.findAllByTherapistIdAndDateAndStartTimeGreaterThanEqualAndEndTimeLessThanEqual(
                         agendaDTO.getTherapistId(),
@@ -89,7 +95,7 @@ public class AgendaService {
                         agendaDTO.getEndTime());
 
         if(!agendas.isEmpty()){
-            throw  new ServiceException("horario nao disponivel", HttpStatus.BAD_REQUEST);
+            throw  new ServiceException("Horario nao disponível.", HttpStatus.BAD_REQUEST);
         }
     }
 

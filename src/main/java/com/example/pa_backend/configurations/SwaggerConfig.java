@@ -1,13 +1,10 @@
 package com.example.pa_backend.configurations;
 
-import com.example.pa_backend.PaBackendApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
@@ -25,7 +22,6 @@ public class SwaggerConfig {
                                  .license("MIT")
                                  .licenseUrl("https://opensource.org/licenses/MIT")
                                  .build())
-//				.tags(new Tag("Note", "Endpoints for CRUD operations on notes"))
                 .select().apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .build();
     }

@@ -31,22 +31,11 @@ public class AgendaController {
 
     @PostMapping("/")
     public Object create(@RequestBody AgendaDTO agendaDTO) {
-
-
         return agendaService.create(agendaDTO);
     }
 
-//    @PutMapping("/{id}")
-//    public Object update(@PathVariable int id,
-//                         @RequestBody AgendaDTO agendaDTO) {
-//
-//
-//        return agendaService.update(id,agendaDTO);
-//    }
-
     @DeleteMapping("/{id}")
     public Object delete(@PathVariable int id) {
-
         return agendaService.delete(id);
     }
 }
