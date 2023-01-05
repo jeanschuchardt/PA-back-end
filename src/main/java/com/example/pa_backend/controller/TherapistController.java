@@ -1,5 +1,6 @@
 package com.example.pa_backend.controller;
 
+import com.example.pa_backend.dto.DataDTO;
 import com.example.pa_backend.entity.user.Therapist;
 import com.example.pa_backend.exception.ServiceException;
 import com.example.pa_backend.repository.TherapistRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @CommonsLog
@@ -25,17 +27,18 @@ public class TherapistController {
     }
 
     @GetMapping("/{id}")
-    public Object getById(@PathVariable int id) {
+    public Therapist getById(@PathVariable int id) {
         Therapist t = therapistRepository.findById(id).orElseThrow(
                 () -> new ServiceException("Nao encontrado", HttpStatus.BAD_REQUEST));
         return t;
 
     }
 
-    @PostMapping("/")
-    public Object create() {
+    @PostMapping("")
+    public Therapist create(@RequestBody DataDTO data) {
+        Therapist therapist = new Therapist().setName(data.getName()).setEmail(data.getEmail());
 
-        return null;
+        return therapistRepository.save(therapist);
     }
 
     @PutMapping("/{id}")

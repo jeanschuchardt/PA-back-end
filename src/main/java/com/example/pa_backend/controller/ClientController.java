@@ -1,10 +1,14 @@
 package com.example.pa_backend.controller;
 
+import com.example.pa_backend.dto.ClientDTO;
 import com.example.pa_backend.entity.user.Client;
 import com.example.pa_backend.repository.ClientRepository;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @CommonsLog
 @RestController
@@ -16,8 +20,8 @@ public class ClientController {
     private ClientRepository clientRepository;
 
     @GetMapping("")
-    public Object getAll() {
-        throw  new RuntimeException("Not implemented");
+    public List<Client> getAll() {
+        return clientRepository.findAll();
 
     }
 
@@ -27,20 +31,39 @@ public class ClientController {
     }
 
     @PostMapping("/")
-    public Object create() {
+    public Client create(@RequestBody ClientDTO clientDTO) {
+        Client client = new Client();
+        client.setName(clientDTO.getName());
+        client.setEmail(clientDTO.getEmail());
 
-        throw  new RuntimeException("Not implemented");
+        return clientRepository.save(client);
+
+
     }
 
     @PutMapping("/{id}")
-    public Object update(@PathVariable int id) {
+    public Object update(@PathVariable int id, @RequestBody ClientDTO clientDTO) {
 
-        throw  new RuntimeException("Not implemented");
+        Optional<Client> id1 = clientRepository.findById(id);
+        if (id1.isPresent()) {
+            Client client = id1.get();
+            client.setName(clientDTO.getName());
+            client.setEmail(clientDTO.getEmail());
+
+            return clientRepository.save(client);
+        } else {
+            throw new RuntimeException("Not deleted");
+        }
     }
 
     @DeleteMapping("/{id}")
-    public Object delete(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
+        Optional<Client> client = clientRepository.findById(id);
+        if (client.isPresent()) {
+            clientRepository.delete(client.get());
+        } else {
+            throw new RuntimeException("Not deleted");
+        }
 
-        throw  new RuntimeException("Not implemented");
     }
 }

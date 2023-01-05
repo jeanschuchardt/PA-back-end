@@ -1,10 +1,9 @@
 package com.example.pa_backend.entity;
 
+import com.example.pa_backend.entity.user.Therapist;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -27,6 +26,10 @@ public class TherapistAddress extends BaseEntity {
     @Column
     private String  country;
 
-    @Column
-    private int  therapistId;
+//    @Column
+//    private int  therapistId;
+
+    @ManyToOne
+    @JoinColumn(name="terapistId")
+    private Therapist therapist;
 }
