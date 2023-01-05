@@ -1,6 +1,9 @@
 package com.example.pa_backend.entity;
 
 import com.example.pa_backend.entity.user.Therapist;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,10 +29,11 @@ public class TherapistAddress extends BaseEntity {
     @Column
     private String  country;
 
-//    @Column
-//    private int  therapistId;
+    @Column
+    private int  terapistId;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="terapistId")
+    @JoinColumn(name="terapistId",referencedColumnName = "id", insertable = false, updatable = false)
     private Therapist therapist;
 }

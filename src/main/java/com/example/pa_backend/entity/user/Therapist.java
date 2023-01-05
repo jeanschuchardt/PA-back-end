@@ -1,10 +1,14 @@
 package com.example.pa_backend.entity.user;
 
 import com.example.pa_backend.entity.TherapistAddress;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -24,6 +28,6 @@ public class Therapist {
     private String email;
 
     @OneToMany(mappedBy="therapist")
-    private Set<TherapistAddress> addresses;
+    private List<TherapistAddress> addresses;
 
 }
