@@ -11,7 +11,7 @@ import java.util.List;
 
 @CommonsLog
 @RestController
-@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8080", "*", "http://192.168.1.8:8081"})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/agenda")
 public class AgendaController {
 

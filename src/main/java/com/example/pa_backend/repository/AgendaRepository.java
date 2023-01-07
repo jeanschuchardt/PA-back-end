@@ -12,7 +12,9 @@ import java.util.List;
 public interface AgendaRepository extends BaseRepository<Agenda> {
 
 
-    List<Agenda> findAllByTherapistIdAndDateAndStartTimeGreaterThanEqualAndEndTimeLessThanEqual(int id, LocalDate date,
-                                                                                         LocalTime startTime,
-                                                                                         LocalTime endTime);
+    List<Agenda> findAllByTherapistIdAndDateAndStartTimeGreaterThanEqualAndEndTimeLessThanEqualAndClientEmail
+            (int id, LocalDate date,
+             LocalTime startTime,
+             LocalTime endTime,
+             String email);
 }

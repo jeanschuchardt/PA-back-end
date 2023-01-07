@@ -27,7 +27,12 @@ public class Therapist {
     @Column
     private String email;
 
-    @OneToMany(mappedBy="therapist")
-    private List<TherapistAddress> addresses;
+    @Column
+    private String therapy;
+
+    @Column
+    private String address;
+
+
 
 }

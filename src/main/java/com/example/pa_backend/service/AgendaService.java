@@ -44,20 +44,30 @@ public class AgendaService {
 
 
     public Agenda create(AgendaDTO agendaDTO) {
-        //verifica se a tipo de atedimento possui uma pre-configuração
-        TherapyConfiguration therapyConfiguration = getTherapyConfiguration(agendaDTO);
+        Agenda  agenda =  new Agenda();
 
-        //com a pre-configuração atualiza o horaio que o atendimento ira terminar
-        agendaDTO.setEndTime(getEndTime(agendaDTO.getStartTime(),therapyConfiguration));
+        agenda.setTherapistId(agendaDTO.getTherapistId());
+        agenda.setClientEmail(agendaDTO.getClientEmail());
+        agenda.setClientName(agendaDTO.getClientName());
+        agenda.setAddress(agendaDTO.getAddress());
+        agenda.setDate(agendaDTO.getDate());
+        agenda.setStartTime(agendaDTO.getTime());
+        LocalTime endTime = agendaDTO.getTime().plusHours(1).plusMinutes(30);
+        agenda.setEndTime(endTime);
 
-        // verifica se a data e o horario, assim como o terapeuta e o local esta disponivel
-        checkAgendaAvailability(agendaDTO);
+        List<Agenda> agendas =
+                agendaRepository.findAllByTherapistIdAndDateAndStartTimeGreaterThanEqualAndEndTimeLessThanEqualAndClientEmail(
+                        agenda.getTherapistId(),
+                        agendaDTO.getDate(),
+                        agenda.getStartTime(),
+                        agenda.getEndTime(),
+                        agenda.getClientEmail()
+                );
+    if(!agendas.isEmpty()){
+        throw  new ServiceException("Horario nao disponiovel", HttpStatus.BAD_REQUEST);
+    }
 
-        //mapeia o dto para a entity
-        Agenda map = mapAgenda(agendaDTO);
-
-        //salva o agendamento
-        return agendaRepository.save(map);
+        return agendaRepository.save(agenda);
     }
 
     private Agenda mapAgenda(AgendaDTO agendaDTO) {
@@ -75,30 +85,6 @@ public class AgendaService {
         return startTime.plus(between);
 
     }
-
-    private TherapyConfiguration getTherapyConfiguration(AgendaDTO agendaDTO) {
-
-      return therapyConfigurationRepository
-                .findByTherapyIdAndTherapistIdAndTherapistAddressId(agendaDTO.getTherapyId(),
-                                                                    agendaDTO.getTherapistId(),
-                                                                    agendaDTO.getLocationId())
-                .orElseThrow(() -> new ServiceException("Terapia não apresenta configurações pre definidas.",
-                                                        HttpStatus.BAD_REQUEST));
-    }
-
-    private void checkAgendaAvailability(AgendaDTO agendaDTO) {
-        List<Agenda> agendas =
-                agendaRepository.findAllByTherapistIdAndDateAndStartTimeGreaterThanEqualAndEndTimeLessThanEqual(
-                        agendaDTO.getTherapistId(),
-                        agendaDTO.getDate(),
-                        agendaDTO.getStartTime(),
-                        agendaDTO.getEndTime());
-
-        if(!agendas.isEmpty()){
-            throw  new ServiceException("Horario nao disponível.", HttpStatus.BAD_REQUEST);
-        }
-    }
-
 
     public Agenda update(int id, AgendaDTO agendaDTO) {
         Agenda byId = getById(id);

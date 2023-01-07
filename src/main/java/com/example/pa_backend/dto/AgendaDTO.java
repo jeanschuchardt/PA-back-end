@@ -12,11 +12,11 @@ import java.util.Date;
 @Data
 public class AgendaDTO  {
 
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
     private int  therapistId;
-    private int  clientId;
-    private int locationId;
-    private int  therapyId;
+    private LocalDate date;
+    private LocalTime time;
+    private String clientName;
+    private String clientEmail;
+    private String  address;
+
 }

@@ -5,15 +5,15 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity(name = "agenda")
 @Data
 @Table(name = "agenda")
 public class Agenda extends BaseEntity {
+    @Column
+    private int therapistId;
 
     @Column
     private LocalDate date;
@@ -25,11 +25,9 @@ public class Agenda extends BaseEntity {
     private LocalTime endTime;
 
     @Column
-    private int  therapistId;
-
+    private String clientName;
     @Column
-    private int  clientId;
-
+    private String clientEmail;
     @Column
-    private int  therapyId;
+    private String address;
 }

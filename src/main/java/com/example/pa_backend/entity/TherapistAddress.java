@@ -32,8 +32,5 @@ public class TherapistAddress extends BaseEntity {
     @Column
     private int  terapistId;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="terapistId",referencedColumnName = "id", insertable = false, updatable = false)
-    private Therapist therapist;
+
 }
