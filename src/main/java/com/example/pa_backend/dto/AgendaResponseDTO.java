@@ -9,6 +9,7 @@ import java.time.LocalTime;
 @Data
 @Accessors(chain = true)
 public class AgendaResponseDTO {
+    private int  id;
     String thearapistName;
     String thearapistEmail;
     private int  therapistId;
@@ -18,4 +19,6 @@ public class AgendaResponseDTO {
     private String clientName;
     private String clientEmail;
     private String  address;
+
+
 }

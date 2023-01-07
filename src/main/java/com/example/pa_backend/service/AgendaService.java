@@ -135,7 +135,8 @@ public class AgendaService {
                                                                          .setEndTime(agenda.getEndTime())
                                                                          .setTherapistId(agenda.getTherapistId())
                                                                          .setThearapistName(therapist.getName())
-                                                                         .setThearapistEmail(therapist.getEmail());
+                                                                         .setThearapistEmail(therapist.getEmail())
+                    .setId(agenda.getId());
 
             agendaResponseDTOS.add(agendaResponseDTO);
 

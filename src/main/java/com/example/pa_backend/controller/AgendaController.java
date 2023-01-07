@@ -1,6 +1,7 @@
 package com.example.pa_backend.controller;
 
 import com.example.pa_backend.dto.AgendaDTO;
+import com.example.pa_backend.dto.AgendaResponseDTO;
 import com.example.pa_backend.entity.Agenda;
 import com.example.pa_backend.service.AgendaService;
 import lombok.extern.apachecommons.CommonsLog;
@@ -41,9 +42,9 @@ public class AgendaController {
     }
 
 
-    @GetMapping("/{email}")
-    public Object getByEmail(@PathVariable String email) {
-        agendaService.getByEmail(email);
-        return byId;
+    @GetMapping("/email/{email}")
+    public List<AgendaResponseDTO> getByEmail(@PathVariable String email) {
+        List<AgendaResponseDTO> byEmail = agendaService.getByEmail(email);
+        return byEmail;
     }
 }
