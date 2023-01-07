@@ -64,7 +64,7 @@ public class AgendaService {
                         agenda.getClientEmail()
                 );
     if(!agendas.isEmpty()){
-        throw  new ServiceException("Horario nao disponiovel", HttpStatus.BAD_REQUEST);
+        throw  new ServiceException("Horário não disponível", HttpStatus.BAD_REQUEST);
     }
 
         return agendaRepository.save(agenda);
