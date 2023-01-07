@@ -17,4 +17,7 @@ public interface AgendaRepository extends BaseRepository<Agenda> {
              LocalTime startTime,
              LocalTime endTime,
              String email);
+
+    List<Agenda> findAllByClientEmail(String email);
+
 }

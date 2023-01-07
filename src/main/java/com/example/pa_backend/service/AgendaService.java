@@ -1,10 +1,13 @@
 package com.example.pa_backend.service;
 
 import com.example.pa_backend.dto.AgendaDTO;
+import com.example.pa_backend.dto.AgendaResponseDTO;
 import com.example.pa_backend.entity.Agenda;
 import com.example.pa_backend.entity.TherapyConfiguration;
+import com.example.pa_backend.entity.user.Therapist;
 import com.example.pa_backend.exception.ServiceException;
 import com.example.pa_backend.repository.AgendaRepository;
+import com.example.pa_backend.repository.TherapistRepository;
 import com.example.pa_backend.repository.TherapyConfigurationRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +28,9 @@ public class AgendaService {
 
     @Autowired
     private TherapyConfigurationRepository therapyConfigurationRepository;
+
+    @Autowired
+    private TherapistRepository therapistRepository;
 
 
     public List<Agenda> getAll() {
@@ -113,4 +120,28 @@ public class AgendaService {
     }
 
 
+    public List<AgendaResponseDTO> getByEmail(String email) {
+        List<Agenda> allByClientEmail = agendaRepository.findAllByClientEmail(email);
+        List<AgendaResponseDTO> agendaResponseDTOS = new ArrayList<>();
+        for (Agenda agenda : allByClientEmail) {
+            Therapist therapist = therapistRepository.findById(agenda.getTherapistId()).orElseThrow(
+                    () -> new ServiceException("Not found", HttpStatus.BAD_REQUEST));
+
+            AgendaResponseDTO agendaResponseDTO = new AgendaResponseDTO().setAddress(agenda.getAddress())
+                                                                         .setClientEmail(agenda.getClientEmail())
+                                                                         .setClientName(agenda.getClientName())
+                                                                         .setDate(agenda.getDate())
+                                                                         .setStartTime(agenda.getStartTime())
+                                                                         .setEndTime(agenda.getEndTime())
+                                                                         .setTherapistId(agenda.getTherapistId())
+                                                                         .setThearapistName(therapist.getName())
+                                                                         .setThearapistEmail(therapist.getEmail());
+
+            agendaResponseDTOS.add(agendaResponseDTO);
+
+        }
+
+        return agendaResponseDTOS;
+
+    }
 }

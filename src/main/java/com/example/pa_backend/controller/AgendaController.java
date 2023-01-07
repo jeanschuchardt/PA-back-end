@@ -39,4 +39,11 @@ public class AgendaController {
     public Object delete(@PathVariable int id) {
         return agendaService.delete(id);
     }
+
+
+    @GetMapping("/{email}")
+    public Object getByEmail(@PathVariable String email) {
+        agendaService.getByEmail(email);
+        return byId;
+    }
 }
