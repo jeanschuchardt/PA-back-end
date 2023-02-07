@@ -3,9 +3,11 @@ package com.example.pa_backend.controller;
 import com.example.pa_backend.dto.AgendaDTO;
 import com.example.pa_backend.dto.AgendaResponseDTO;
 import com.example.pa_backend.entity.Agenda;
+import com.example.pa_backend.exception.ServiceException;
 import com.example.pa_backend.service.AgendaService;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,15 +34,18 @@ public class AgendaController {
     }
 
     @PostMapping("/")
-    public Object create(@RequestBody AgendaDTO agendaDTO) {
-        return agendaService.create(agendaDTO);
+    public Agenda create(@RequestBody AgendaDTO agendaDTO) {
+        try {
+            return agendaService.create(agendaDTO);
+        }catch (Exception e){
+            throw  new ServiceException("Horário não disponível", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public Object delete(@PathVariable int id) {
-        return agendaService.delete(id);
+    public void delete(@PathVariable int id) {
+        agendaService.delete(id);
     }
-
 
     @GetMapping("/email/{email}")
     public List<AgendaResponseDTO> getByEmail(@PathVariable String email) {
