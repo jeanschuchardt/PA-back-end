@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "1fb3180d-b5cd-423c-b318-728c7f8c3541",
+		"name": "TCC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test basic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9999/agenda/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n  \"clientId\": 50,\r\n  \"date\": \"2022-12-04\",\r\n  \"startTime\": \"05:00:00\",\r\n  \"locationId\": 1,\r\n  \"therapistId\": 50,\r\n  \"therapyId\": 23\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/agenda/",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"agenda",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/agendass",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/agendass",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"agendass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/agendass Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/agendass",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"agendass"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
